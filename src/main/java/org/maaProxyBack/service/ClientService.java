@@ -1,14 +1,14 @@
 package org.maaProxyBack.service;
 
-import org.maaProxyBack.model.Client;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.maaProxyBack.model.Client2;
+
 public interface ClientService {
-    List<Client> getAll();
-    Optional<Client> getById(long id);
+    List<Client2> getAll();
+    Optional<Client2> getById(long id);
     boolean deleteById(long id);
-    Client update(Client client);
-    Client save(Client client);
+    Client2 update(Client2 client);
+    Client2 save(Client2 client);
 }

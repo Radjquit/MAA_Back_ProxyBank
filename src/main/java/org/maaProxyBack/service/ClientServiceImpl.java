@@ -1,11 +1,11 @@
 package org.maaProxyBack.service;
 
-import org.maaProxyBack.model.Client;
-import org.maaProxyBack.persistance.ClientPersistance;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.maaProxyBack.model.Client2;
+import org.maaProxyBack.persistance.ClientPersistance;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -17,12 +17,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> getAll() {
+    public List<Client2> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public Optional<Client> getById(long id) {
+    public Optional<Client2> getById(long id) {
         return dao.getById(id);
     }
 
@@ -32,12 +32,14 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client update(Client client) {
+    public Client2 update(Client2 client) {
         return dao.update(client);
     }
 
     @Override
-    public Client save(Client client) {
+    public Client2 save(Client2 client) {
+        System.out.println(client.toString() + "Service");
         return dao.save(client);
+
     }
 }
