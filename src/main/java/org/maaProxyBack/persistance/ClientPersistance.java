@@ -11,5 +11,6 @@ public interface ClientPersistance{
     boolean deleteById(long id);
     Client2 update(Client2 client);
     Client2 save(Client2 client);
+    List<Client2> getClientsByAdvisor(long advisorId);
 
 }

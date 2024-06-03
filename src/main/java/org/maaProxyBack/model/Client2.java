@@ -1,10 +1,12 @@
 package org.maaProxyBack.model;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Client2 {
@@ -14,10 +16,23 @@ public class Client2 {
 	private Long id;
 	
 	@Embedded
-	private Identity identity;
+	private Identity identity = new Identity();
 	
 	@Embedded
 	private ContactDetails contactDetails;
+
+	@OneToMany(mappedBy = "client",cascade = CascadeType.PERSIST)
+	//@JsonIgnore
+	private Set<SavingAccount> savingAccounts = new HashSet<>();
+
+	@OneToMany(mappedBy = "client",cascade = CascadeType.PERSIST)
+	//@JsonIgnore
+	private Set<CurrentAccount> currentAccounts = new HashSet<>();
+
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "advisor_id")
+	private Advisor advisor;
 
 	public Long getId() {
 		return id;
@@ -43,6 +58,21 @@ public class Client2 {
 		this.contactDetails = contactDetails;
 	}
 
+	public Set<SavingAccount> getSavingAccounts() {
+		return savingAccounts;
+	}
+
+	public void setSavingAccounts(Set<SavingAccount> savingAccounts) {
+		this.savingAccounts = savingAccounts;
+	}
+
+	public Set<CurrentAccount> getCurrentAccounts() {
+		return currentAccounts;
+	}
+
+	public void setCurrentAccounts(Set<CurrentAccount> currentAccounts) {
+		this.currentAccounts = currentAccounts;
+	}
 
 	@Override
 	public String toString() {

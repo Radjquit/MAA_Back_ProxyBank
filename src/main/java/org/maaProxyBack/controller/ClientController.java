@@ -30,9 +30,7 @@ public class ClientController {
     }
 
     @GetMapping
-    public List<Client2> getAllClients(){
-        return service.getAll();
-    }
+    public List<Client2> getAllClients(){return service.getAll();}
 
     @GetMapping("/{id}")
     public ResponseEntity<Client2> getById(@PathVariable long id){
@@ -49,6 +47,8 @@ public class ClientController {
 
     @PostMapping
     public void postClient(@RequestBody @Valid Client2 client){
+        client.getCurrentAccounts().forEach(ca->ca.setClient(client));
+        client.getSavingAccounts().forEach(ca->ca.setClient(client));
         service.save(client);
         System.out.println(client.toString() + "Controller");
     }

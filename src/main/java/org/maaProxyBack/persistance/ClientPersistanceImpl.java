@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.maaProxyBack.model.Client;
 import org.maaProxyBack.model.Client2;
+import org.maaProxyBack.model.CurrentAccount;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,7 +15,6 @@ public class ClientPersistanceImpl implements ClientPersistance{
     public ClientPersistanceImpl(ClientRepository repository) {
         this.repository = repository;
     }
-
 
     @Override
     public List<Client2> getAll() {
@@ -44,4 +44,12 @@ public class ClientPersistanceImpl implements ClientPersistance{
         System.out.println(client.toString()+ "Persistance");
         return repository.save(client);
     }
+
+    @Override
+    public List<Client2> getClientsByAdvisor(long advisorId) {
+        // return repository.findByAdvisorId(advisorId);
+        return repository.findByAdvisor_id(advisorId);
+    }
+
+
 }
