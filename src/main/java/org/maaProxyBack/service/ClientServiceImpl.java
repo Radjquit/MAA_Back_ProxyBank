@@ -3,7 +3,7 @@ package org.maaProxyBack.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.maaProxyBack.model.Client2;
+import org.maaProxyBack.model.BankClient;
 import org.maaProxyBack.persistance.ClientPersistance;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,20 @@ public class ClientServiceImpl implements ClientService {
     public ClientServiceImpl(ClientPersistance dao) {
         this.dao=dao;
     }
+    
 
-    @Override
-    public List<Client2> getAll() {
+    public ClientServiceImpl() {
+		super();
+	}
+
+
+	@Override
+    public List<BankClient> getAll() {
         return dao.getAll();
     }
 
     @Override
-    public Optional<Client2> getById(long id) {
+    public Optional<BankClient> getById(long id) {
         return dao.getById(id);
     }
 
@@ -32,14 +38,24 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client2 update(Client2 client) {
+    public BankClient update(BankClient client) {
         return dao.update(client);
     }
 
     @Override
-    public Client2 save(Client2 client) {
-        System.out.println(client.toString() + "Service");
+    public BankClient save(BankClient client) {
         return dao.save(client);
 
     }
+
+
+	public ClientPersistance getDao() {
+		return dao;
+	}
+
+
+	public void setDao(ClientPersistance dao) {
+		this.dao = dao;
+	}
+    
 }

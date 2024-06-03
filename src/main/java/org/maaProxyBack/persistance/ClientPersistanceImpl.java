@@ -3,9 +3,7 @@ package org.maaProxyBack.persistance;
 import java.util.List;
 import java.util.Optional;
 
-import org.maaProxyBack.model.Client;
-import org.maaProxyBack.model.Client2;
-import org.maaProxyBack.model.CurrentAccount;
+import org.maaProxyBack.model.BankClient;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,12 +15,12 @@ public class ClientPersistanceImpl implements ClientPersistance{
     }
 
     @Override
-    public List<Client2> getAll() {
+    public List<BankClient> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Client2> getById(long id) {
+    public Optional<BankClient> getById(long id) {
         return repository.findById(id);
     }
 
@@ -34,19 +32,18 @@ public class ClientPersistanceImpl implements ClientPersistance{
     }
 
     @Override
-    public Client2 update(Client2 client) {
-        //to be implemented
-        return client;
+    public BankClient update(BankClient client) {
+    	return repository.save(client);
+    	
     }
 
     @Override
-    public Client2 save(Client2 client) {
-        System.out.println(client.toString()+ "Persistance");
+    public BankClient save(BankClient client) {
         return repository.save(client);
     }
 
     @Override
-    public List<Client2> getClientsByAdvisor(long advisorId) {
+    public List<BankClient> getClientsByAdvisor(long advisorId) {
         // return repository.findByAdvisorId(advisorId);
         return repository.findByAdvisor_id(advisorId);
     }

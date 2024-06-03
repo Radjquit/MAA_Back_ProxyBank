@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Client2 {
+public class BankClient {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

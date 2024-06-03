@@ -17,7 +17,7 @@ public abstract class Account {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id")
     @JsonIgnore
-    private Client2 client;
+    private BankClient client;
 
     public long getAccountNumber() {
         return accountNumber;
@@ -43,11 +43,11 @@ public abstract class Account {
         this.openingDate = openingDate;
     }
 
-    public Client2 getClient() {
+    public BankClient getClient() {
         return client;
     }
 
-    public void setClient(Client2 client) {
+    public void setClient(BankClient client) {
         this.client = client;
     }
 

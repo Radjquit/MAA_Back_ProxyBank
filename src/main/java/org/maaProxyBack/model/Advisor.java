@@ -17,7 +17,7 @@ public class Advisor {
     private Identity identity = new Identity();
 
     @OneToMany(mappedBy = "advisor",cascade = CascadeType.PERSIST)
-    private List<Client2> clients = new ArrayList<>(10);
+    private List<BankClient> clients = new ArrayList<>(10);
 
     public long getId() {
         return id;
@@ -35,11 +35,11 @@ public class Advisor {
         this.identity = identity;
     }
 
-    public List<Client2> getClients() {
+    public List<BankClient> getClients() {
         return clients;
     }
 
-    public void setClients(List<Client2> clients) {
+    public void setClients(List<BankClient> clients) {
         this.clients = clients;
     }
 }
