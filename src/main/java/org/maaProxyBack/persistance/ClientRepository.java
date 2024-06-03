@@ -1,8 +1,7 @@
 package org.maaProxyBack.persistance;
 
-import org.maaProxyBack.model.Client;
-import org.maaProxyBack.model.Client2;
+import org.maaProxyBack.model.BankClient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClientRepository extends JpaRepository<Client2,Long> {
+public interface ClientRepository extends JpaRepository<BankClient,Long> {
 }
