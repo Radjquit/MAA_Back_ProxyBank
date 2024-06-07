@@ -12,6 +12,7 @@ public abstract class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long accountNumber;
     private double balance;
+    private String category;
     private LocalDateTime  openingDate = LocalDateTime.now();
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -19,18 +20,15 @@ public abstract class Account {
     @JsonIgnore
     private BankClient client;
     
-    
 
     public Account() {}
-    
     
 
 	public Account(double balance) {
 		this.balance = balance;
 	}
 
-
-
+	
 	public long getAccountNumber() {
         return accountNumber;
     }
@@ -61,13 +59,22 @@ public abstract class Account {
 
     public void setClient(BankClient client) {
         this.client = client;
-    }
+    }  
 
-    @Override
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	@Override
     public String toString() {
         return "Account{" +
                 "accountNumber=" + accountNumber +
                 ", balance=" + balance +
+                ", category=" + category +
                 ", openingDate=" + openingDate +
                 ", client=" + client.getId() +
                 '}';

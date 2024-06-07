@@ -3,9 +3,11 @@ package org.maaProxyBack.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.maaProxyBack.dto.AccountDto;
 import org.maaProxyBack.model.Account;
 import org.maaProxyBack.model.BankClient;
 import org.maaProxyBack.model.CurrentAccount;
+import org.maaProxyBack.model.SavingAccount;
 import org.maaProxyBack.service.AccountService;
 import org.maaProxyBack.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +58,7 @@ public class AccountController {
     
     @GetMapping("/clientId")
     public List<Account> getAccountByClientId(@RequestParam(name="id",required=false) long id){
-       return serviceAccount.getAccountsByClient(service.getById(id).orElse(new BankClient()));
+       return serviceAccount.getAccountsByClient(service.getById(id).get());
         /*
         if (getClient.isPresent()){
 
@@ -66,12 +68,25 @@ public class AccountController {
         */
     }
 
-    @PostMapping
-    public void postAccount(@RequestBody @Valid CurrentAccount account, long id){
-    	account.setClient(service.getById(id).get());
+    @PostMapping("/{id}")
+    public void postAccount(@PathVariable long id,@RequestBody @Valid AccountDto accountDto){
+    	if(accountDto.getType().equalsIgnoreCase("Running")) {
+    		CurrentAccount account = new CurrentAccount();
+    		account.setBalance(accountDto.getBalance());
+    		account.setCategory(accountDto.getCategory());
+    		account.setClient(service.getById(id).get());
     		service.getById(id).get().getCurrentAccounts().add(account);
-        serviceAccount.save(account);
+    		serviceAccount.save(account);
+    	}else{
+    		SavingAccount account = new SavingAccount();
+    		account.setBalance(accountDto.getBalance());
+    		account.setCategory(accountDto.getCategory());
+    		account.setClient(service.getById(id).get());
+    		service.getById(id).get().getSavingAccounts().add(account);
+    		serviceAccount.save(account);
+    	}
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable long id){
