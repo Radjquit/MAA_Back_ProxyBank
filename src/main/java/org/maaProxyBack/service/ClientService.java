@@ -8,7 +8,7 @@ import org.maaProxyBack.model.BankClient;
 public interface ClientService {
     List<BankClient> getAll();
     Optional<BankClient> getById(long id);
-    boolean deleteById(long id);
+    void deleteById(long id);
     BankClient update(BankClient client);
     BankClient save(BankClient client);
 }

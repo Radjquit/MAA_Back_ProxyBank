@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 public class CurrentAccount extends Account{
     private double authorizedOverdraft = defaultAuthorizedOverdraft;
     private static double defaultAuthorizedOverdraft = 500;
+    
+    
 
     public double getAuthorizedOverdraft() {
         return authorizedOverdraft;

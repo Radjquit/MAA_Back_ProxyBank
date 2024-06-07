@@ -18,8 +18,20 @@ public abstract class Account {
     @JoinColumn(name = "client_id")
     @JsonIgnore
     private BankClient client;
+    
+    
 
-    public long getAccountNumber() {
+    public Account() {}
+    
+    
+
+	public Account(double balance) {
+		this.balance = balance;
+	}
+
+
+
+	public long getAccountNumber() {
         return accountNumber;
     }
 

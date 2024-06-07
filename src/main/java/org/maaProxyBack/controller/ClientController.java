@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.maaProxyBack.model.BankClient;
+import org.maaProxyBack.service.AccountService;
 import org.maaProxyBack.service.ClientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,9 +25,11 @@ import jakarta.validation.Valid;
 @RequestMapping("clients")
 public class ClientController {
     private ClientService service;
+    private AccountService serviceAccount;
 
-    public ClientController(ClientService service) {
+    public ClientController(ClientService service, AccountService serviceAccount) {
         this.service = service;
+        this.serviceAccount = serviceAccount;
     }
 
     @GetMapping
@@ -56,9 +59,8 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BankClient> deleteClient(@PathVariable long id){
-        boolean deleted = service.deleteById(id);
-        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    public void deleteClient(@PathVariable long id){
+    	service.deleteById(id);
     }
     
     @PutMapping("/{id}")
