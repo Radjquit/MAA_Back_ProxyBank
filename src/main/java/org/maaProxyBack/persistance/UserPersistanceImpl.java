@@ -20,7 +20,7 @@ public class UserPersistanceImpl implements UserPersistance{
 	@Override
 	public User signin(User user) {
         System.out.println(user.toString()+ "Persistance");
-		return userRepo.findAll().contains(user) ? user : null;
+		return userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 	}
 

@@ -17,17 +17,16 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserLogController {
 	private UserService service;
-	private ControllerExceptionHandler exception;
 	
 	public UserLogController(UserService service) {
 		this.service = service;
-		this.exception = exception;
 	}
 	
 	
 	  @PostMapping("signin")
 	    public ResponseEntity<ResponseCustom> signIn(@RequestBody @Valid User user){
 	        System.out.println(user.toString() + "Controller");
+	        System.out.println(this.service.signin(user) != null);
 	        	if (this.service.signin(user) != null) {
 		        	ResponseCustom response = new ResponseCustom();
 		            response.setStatusCode("200");
