@@ -3,43 +3,53 @@ package org.maaProxyBack.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.maaProxyBack.model.Client2;
-import org.maaProxyBack.persistance.ClientPersistance;
+import org.maaProxyBack.model.BankClient;
+import org.maaProxyBack.persistance.ClientRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    private ClientPersistance dao;
-
-    public ClientServiceImpl(ClientPersistance dao) {
+    private ClientRepository dao;
+    
+    public ClientServiceImpl(ClientRepository dao) {
         this.dao=dao;
     }
 
-    @Override
-    public List<Client2> getAll() {
-        return dao.getAll();
+	@Override
+    public List<BankClient> getAll() {
+        return dao.findAll();
     }
 
     @Override
-    public Optional<Client2> getById(long id) {
-        return dao.getById(id);
+    public Optional<BankClient> getById(long id) {
+        return dao.findById(id);
     }
 
     @Override
-    public boolean deleteById(long id) {
-        return dao.deleteById(id);
+    public void deleteById(long id) {
+         dao.deleteById(id);;
     }
 
     @Override
-    public Client2 update(Client2 client) {
-        return dao.update(client);
+    public BankClient update(BankClient client) {
+        return dao.save(client);
     }
 
     @Override
-    public Client2 save(Client2 client) {
-        System.out.println(client.toString() + "Service");
+    public BankClient save(BankClient client) {
         return dao.save(client);
 
     }
+
+	public ClientRepository getDao() {
+		return dao;
+	}
+
+	public void setDao(ClientRepository dao) {
+		this.dao = dao;
+	}
+
+    
+    
 }
