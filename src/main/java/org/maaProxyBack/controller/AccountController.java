@@ -8,6 +8,7 @@ import org.maaProxyBack.model.BankClient;
 import org.maaProxyBack.model.CurrentAccount;
 import org.maaProxyBack.service.AccountService;
 import org.maaProxyBack.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +37,6 @@ public class AccountController {
     }
 
     @GetMapping
-
     public List<Account> getAllClients(){
         return serviceAccount.getAllAccounts();
     }

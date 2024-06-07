@@ -2,6 +2,8 @@ package org.maaProxyBack.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +16,8 @@ public class BankClient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Valid
 	@Embedded
 	private Identity identity = new Identity();
 	
@@ -29,7 +32,7 @@ public class BankClient {
 	//@JsonIgnore
 	private Set<CurrentAccount> currentAccounts = new HashSet<>();
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	@JoinColumn(name = "advisor_id")
 	private Advisor advisor;
@@ -72,6 +75,14 @@ public class BankClient {
 
 	public void setCurrentAccounts(Set<CurrentAccount> currentAccounts) {
 		this.currentAccounts = currentAccounts;
+	}
+
+	public Advisor getAdvisor() {
+		return advisor;
+	}
+
+	public void setAdvisor(Advisor advisor) {
+		this.advisor = advisor;
 	}
 
 	@Override

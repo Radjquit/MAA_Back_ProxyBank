@@ -50,6 +50,10 @@ public class ClientServiceImpl implements ClientService {
 		this.dao = dao;
 	}
 
+    public List<BankClient> getAllByAdvisor(long id){
+        return dao.findByAdvisorId(id);
+    }
+
     
     
 }

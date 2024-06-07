@@ -1,11 +1,14 @@
 package org.maaProxyBack.model;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotEmpty;
 
 @Embeddable
 public class Identity {
 	
 	private String firstName;
+
+	@NotEmpty(message = "Last name cannot be empty")
 	private String lastName;
 	
 	

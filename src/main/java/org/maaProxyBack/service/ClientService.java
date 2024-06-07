@@ -11,4 +11,5 @@ public interface ClientService {
     void deleteById(long id);
     BankClient update(BankClient client);
     BankClient save(BankClient client);
+    List<BankClient> getAllByAdvisor(long id);
 }

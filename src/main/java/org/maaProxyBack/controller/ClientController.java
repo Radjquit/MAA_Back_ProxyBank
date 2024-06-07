@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.maaProxyBack.model.BankClient;
 import org.maaProxyBack.service.AccountService;
 import org.maaProxyBack.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,16 +26,13 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("clients")
 public class ClientController {
-    private ClientService service;
-    private AccountService serviceAccount;
 
-    public ClientController(ClientService service, AccountService serviceAccount) {
-        this.service = service;
-        this.serviceAccount = serviceAccount;
-    }
+    @Autowired
+    private ClientService service;
+    //@Autowired
+    //private AccountService serviceAccount;
 
     @GetMapping
-
     public List<BankClient> getAllClients(){
         return service.getAll();
     }
