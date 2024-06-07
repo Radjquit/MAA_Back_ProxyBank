@@ -19,36 +19,39 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserLogController {
 	private UserService service;
-	
+
 	public UserLogController(UserService service) {
 		this.service = service;
 	}
-	
-	
-	  @PostMapping("signin")
-	    public ResponseEntity<ResponseCustom> signIn(@RequestBody @Valid User user){
-	        System.out.println(user.toString() + "Controller");
-	        System.out.println(this.service.signin(user) != null);
-	        	if (this.service.signin(user) != null) {
-		        	ResponseCustom response = new ResponseCustom();
-		            response.setStatusCode("200");
-		            response.setMessage("valid credentials");
-		            return ResponseEntity.status(HttpStatus.OK).body(response);
 
-	        	} else {
+	@PostMapping("signin")
+	public ResponseEntity<ResponseCustom> signIn(@RequestBody @Valid User user) {
+		ResponseCustom response = new ResponseCustom();
 
-		        	ResponseCustom response = new ResponseCustom();
-		            response.setStatusCode("401");
-		            response.setMessage("invalid credentials");
-		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-	        		
-	        	}
+		if (this.service.signin(user) != null && "manager".equals(this.service.signin(user).getRole())) {
+			response.setStatusCode("200");
+			response.setMessage("valid credentials for manager");
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		}
 
-	    }
-	  
-	  @PostMapping("createUser")
-	  public User createUser(@RequestBody @Valid User user) {
-		  return service.save(user);
-	  }
+		else if (this.service.signin(user) != null && "advisor".equals(this.service.signin(user).getRole())) {
+			response.setStatusCode("200");
+			response.setMessage("valid credentials for advisor");
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+
+		} else {
+
+			response.setStatusCode("401");
+			response.setMessage("invalid credentials");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+
+		}
+
+	}
+
+	@PostMapping("createUser")
+	public User createUser(@RequestBody @Valid User user) {
+		return service.save(user);
+	}
 
 }

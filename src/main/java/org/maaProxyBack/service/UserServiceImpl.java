@@ -15,13 +15,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User signin(User user) {
-        System.out.println(user.toString()+ "Persistance");
-		return dao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		String role;
+		if ("manager".equals(user.getRole())) {
+			role = "manager";
+			return dao.findByUsernameAndPasswordAndRole(user.getUsername(), user.getPassword(), role);			
+		}
+		else if ("advisor".equals(user.getRole())) {
+			role = "advisor";
+			return dao.findByUsernameAndPasswordAndRole(user.getUsername(), user.getPassword(), role);			
+		} else {
+			return null;
+			
+		}
 	}
 
 	@Override
 	public User save(User user) {
 		return dao.save(user);
 	}
+
 
 }
