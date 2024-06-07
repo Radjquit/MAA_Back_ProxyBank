@@ -27,10 +27,13 @@ import jakarta.validation.Valid;
 @RequestMapping("clients")
 public class ClientController {
 
-    @Autowired
     private ClientService service;
-    //@Autowired
-    //private AccountService serviceAccount;
+    private AccountService serviceAccount;
+
+    public ClientController(ClientService service, AccountService serviceAccount) {
+        this.service = service;
+        this.serviceAccount = serviceAccount;
+    }
 
     @GetMapping
     public List<BankClient> getAllClients(){

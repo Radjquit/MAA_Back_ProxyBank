@@ -2,6 +2,7 @@ package org.maaProxyBack.controller;
 
 import org.junit.jupiter.api.Test;
 import org.maaProxyBack.model.BankClient;
+import org.maaProxyBack.service.AccountService;
 import org.maaProxyBack.service.ClientService;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ class ClientControllerTest {
 
     @MockBean
     private ClientService service;
+
+    @MockBean
+    private AccountService accountService;
 
     @Test
     void post_coffee_should_return_coffee() throws Exception{
