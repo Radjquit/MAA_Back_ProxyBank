@@ -1,5 +1,7 @@
 package org.maaProxyBack.controller;
 
+import java.util.List;
+
 import org.apache.catalina.connector.Response;
 import org.maaProxyBack.model.ResponseCustom;
 import org.maaProxyBack.model.User;
@@ -30,18 +32,23 @@ public class UserLogController {
 	        	if (this.service.signin(user) != null) {
 		        	ResponseCustom response = new ResponseCustom();
 		            response.setStatusCode("200");
-		            response.setMessage("ok");
+		            response.setMessage("valid credentials");
 		            return ResponseEntity.status(HttpStatus.OK).body(response);
 
 	        	} else {
 
 		        	ResponseCustom response = new ResponseCustom();
 		            response.setStatusCode("401");
-		            response.setMessage("try again");
+		            response.setMessage("invalid credentials");
 		            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
 	        		
 	        	}
 
 	    }
+	  
+	  @PostMapping("createUser")
+	  public User createUser(@RequestBody @Valid User user) {
+		  return service.save(user);
+	  }
 
 }
