@@ -15,12 +15,6 @@ public class ClientServiceImpl implements ClientService {
     public ClientServiceImpl(ClientPersistance dao) {
         this.dao=dao;
     }
-    
-
-    public ClientServiceImpl() {
-		super();
-	}
-
 
 	@Override
     public List<BankClient> getAll() {
