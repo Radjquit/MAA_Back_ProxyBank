@@ -18,12 +18,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-@ActiveProfiles({"test2"})
 //@DataJpaTest
 public class ClientRepositoryTest {
 
     //@Autowired
-    private TestEntityManager manager;
+    //private TestEntityManager manager;
 
     @Autowired
     private ClientRepository repo;
