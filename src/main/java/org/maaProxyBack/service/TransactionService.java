@@ -9,8 +9,6 @@ import org.maaProxyBack.model.Transaction;
 public interface TransactionService {
 
 	List<Transaction> getAllTransactions();
-	
-//	List<Transaction> getTransactionsByAccount(Account account);
 
 	Optional<Transaction> getTransactionByID(long id);
 

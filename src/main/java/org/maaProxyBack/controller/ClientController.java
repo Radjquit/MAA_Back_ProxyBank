@@ -43,13 +43,6 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<BankClient> getById(@PathVariable long id){
         Optional<BankClient> getClient = service.getById(id);
-        /*
-        if (getClient.isPresent()){
-
-            return ResponseEntity.ok(getClient.get());
-        }
-        return ResponseEntity.notFound().build();
-        */
         return getClient.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

@@ -18,11 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
-//@DataJpaTest
 public class ClientRepositoryTest {
-
-    //@Autowired
-    //private TestEntityManager manager;
 
     @Autowired
     private ClientRepository repo;
@@ -42,7 +38,6 @@ public class ClientRepositoryTest {
         BankClient cli = new BankClient();
         cli.getIdentity().setLastName("toto");
         BankClient savedCli = repo.save(cli);
-        //BankClient savedCli = manager.persistAndFlush(cli);
         assertTrue(repo.findById(savedCli.getId()).isPresent());
     }
 
@@ -50,7 +45,6 @@ public class ClientRepositoryTest {
     void delete_should_delete_a_Client(){
         BankClient cli = new BankClient();
         cli.getIdentity().setLastName("toto");
-        //BankClient savedCli = manager.persistAndFlush(cli);
         BankClient savedCli = repo.save(cli);
         repo.deleteById(savedCli.getId());
         assertTrue(repo.findById(savedCli.getId()).isEmpty());

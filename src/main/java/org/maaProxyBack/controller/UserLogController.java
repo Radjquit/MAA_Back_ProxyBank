@@ -33,18 +33,15 @@ public class UserLogController {
 			response.setMessage("valid credentials for manager");
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		}
-
 		else if (this.service.signin(user) != null && "advisor".equals(this.service.signin(user).getRole())) {
 			response.setStatusCode("200");
 			response.setMessage("valid credentials for advisor");
 			return ResponseEntity.status(HttpStatus.OK).body(response);
-
 		} else {
 
 			response.setStatusCode("401");
 			response.setMessage("invalid credentials");
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-
 		}
 
 	}

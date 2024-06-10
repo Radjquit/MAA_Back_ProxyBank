@@ -41,21 +41,8 @@ public class TransactionController {
     @GetMapping("/{id}")
     public ResponseEntity<Transaction> getById(@PathVariable long id){
         Optional<Transaction> getTransac = transacService.getTransactionByID(id);
-        /*
-        if (getClient.isPresent()){
-
-            return ResponseEntity.ok(getClient.get());
-        }
-        return ResponseEntity.notFound().build();
-        */
         return getTransac.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-
-//    @PostMapping("/{id}")
-//    public Transaction postTransaction(@PathVariable long id,@RequestBody @Valid Transaction transac){
-//    	transac.setAccount(serviceAccount.getAccountById(id).get());
-//    	return transacService.save(transac);
-//    }
     
     @PostMapping("/{idDeb}/{idCred}")
     public void postTransaction(@PathVariable long idDeb ,@PathVariable long idCred,@RequestBody @Valid Transaction transac){

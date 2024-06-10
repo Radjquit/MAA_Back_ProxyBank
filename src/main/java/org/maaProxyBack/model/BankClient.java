@@ -25,11 +25,9 @@ public class BankClient {
 	private ContactDetails contactDetails;
 
 	@OneToMany(mappedBy = "client",cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-	//@JsonIgnore
 	private Set<SavingAccount> savingAccounts = new HashSet<>();
 
 	@OneToMany(mappedBy = "client",cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-	//@JsonIgnore
 	private Set<CurrentAccount> currentAccounts = new HashSet<>();
 
 	@ManyToOne(cascade = CascadeType.PERSIST)

@@ -52,8 +52,6 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	
 	@Transactional()
-//	@MesurerPerf
-//	@Transactional(propagation = Propagation.REQUIRED)par défaut
 	public void transfer(long idAccDeb, long idAccCred, Transaction transac)throws BankException {
 		try {
 			Account accDeb = accService.getAccountById(idAccDeb).get();
@@ -70,9 +68,6 @@ public class TransactionServiceImpl implements TransactionService {
 			Transaction transacCredit= new Transaction(null,"Credit : " +transac.getLabel(),transac.getAmount(),new Date());
 			transacCredit.setAccount(accCred);
 			transacDao.save(transacCredit);
-			
-//			logger.debug(opDebit.toString());
-//			logger.debug(opCredit.toString());
 		} catch (Exception e) {
 			throw new BankException("echec virement",e);
 		}

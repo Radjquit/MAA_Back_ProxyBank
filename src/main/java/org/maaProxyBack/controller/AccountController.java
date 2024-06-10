@@ -56,26 +56,12 @@ public class AccountController {
     @GetMapping("/{id}")
     public ResponseEntity<Account> getById(@PathVariable long id){
         Optional<Account> getAccount = serviceAccount.getAccountById(id);
-        /*
-        if (getClient.isPresent()){
-
-            return ResponseEntity.ok(getClient.get());
-        }
-        return ResponseEntity.notFound().build();
-        */
         return getAccount.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     
     @GetMapping("/clientId")
     public List<Account> getAccountByClientId(@RequestParam(name="id",required=false) long id){
        return serviceAccount.getAccountsByClient(service.getById(id).get());
-        /*
-        if (getClient.isPresent()){
-
-            return ResponseEntity.ok(getClient.get());
-        }
-        return ResponseEntity.notFound().build();
-        */
     }
 
     @PostMapping("/{id}")
