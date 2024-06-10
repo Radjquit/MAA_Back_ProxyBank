@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -19,6 +21,9 @@ public abstract class Account {
     @JoinColumn(name = "client_id")
     @JsonIgnore
     private BankClient client;
+    
+    @OneToMany(mappedBy = "account",cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Transaction> transactions = new ArrayList<>();
     
 
     public Account() {}
