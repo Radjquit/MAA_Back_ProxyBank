@@ -1,25 +1,38 @@
 package org.maaProxyBack.dto;
 
 public class AccountDto {
-	long id;
+	long accountNumber;
 	double balance;
 	String type;
 	String category;
 	
+	
+	
+	public AccountDto() {
+		super();
+	}
+
 	public AccountDto(double balance, String type, String category) {
 		this.balance = balance;
 		this.type = type;
 		this.category = category;
 	}
-
-	public long getId() {
-		return id;
+	
+	public AccountDto(long id,double balance, String type, String category) {
+		this.accountNumber = id;
+		this.balance = balance;
+		this.type = type;
+		this.category = category;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public long getAccountNumber() {
+		return accountNumber;
 	}
-
+	
+	public void setAccountNumber(long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	
 	public double getBalance() {
 		return balance;
 	}

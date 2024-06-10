@@ -1,5 +1,6 @@
 package org.maaProxyBack.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +40,17 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<Account> getAllAccounts(){
-        return serviceAccount.getAllAccounts();
+    public List<AccountDto> getAllAccounts(){
+    	List <AccountDto> accountsDto = new ArrayList<>();
+    	List <Account> accounts = serviceAccount.getAllAccounts();
+    	for (Account account : accounts) {
+			if(account.getClass()== CurrentAccount.class) {
+				accountsDto.add(new AccountDto(account.getAccountNumber(),account.getBalance(),"Running", account.getCategory()));
+			}else {
+				accountsDto.add(new AccountDto(account.getAccountNumber(),account.getBalance(),"Saving", account.getCategory()));
+			}
+		}
+    	return accountsDto;
     }
 
     @GetMapping("/{id}")
