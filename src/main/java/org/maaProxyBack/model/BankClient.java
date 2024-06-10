@@ -87,9 +87,12 @@ public class BankClient {
 
 	@Override
 	public String toString() {
-		return "Client2 [id=" + id + ", identity=" + identity + ", contactDetails=" + contactDetails
+		return "BankClient [id=" + id + ", identity=" + identity + ", contactDetails=" + contactDetails
+				+ ", savingAccounts=" + savingAccounts + ", currentAccounts=" + currentAccounts + ", advisor=" + advisor
 				+ "]";
 	}
+
+
 
 
 	

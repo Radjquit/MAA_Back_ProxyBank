@@ -39,7 +39,7 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<Account> getAllClients(){
+    public List<Account> getAllAccounts(){
         return serviceAccount.getAllAccounts();
     }
 
@@ -69,21 +69,21 @@ public class AccountController {
     }
 
     @PostMapping("/{id}")
-    public void postAccount(@PathVariable long id,@RequestBody @Valid AccountDto accountDto){
+    public Account postAccount(@PathVariable long id,@RequestBody @Valid AccountDto accountDto){
     	if(accountDto.getType().equalsIgnoreCase("Running")) {
     		CurrentAccount account = new CurrentAccount();
     		account.setBalance(accountDto.getBalance());
     		account.setCategory(accountDto.getCategory());
     		account.setClient(service.getById(id).get());
     		service.getById(id).get().getCurrentAccounts().add(account);
-    		serviceAccount.save(account);
+    		return serviceAccount.save(account);
     	}else{
     		SavingAccount account = new SavingAccount();
     		account.setBalance(accountDto.getBalance());
     		account.setCategory(accountDto.getCategory());
     		account.setClient(service.getById(id).get());
     		service.getById(id).get().getSavingAccounts().add(account);
-    		serviceAccount.save(account);
+    		return serviceAccount.save(account);
     	}
     }
 
@@ -94,8 +94,7 @@ public class AccountController {
     }
     
     @PutMapping("/{id}")
-    private ResponseEntity<CurrentAccount> updateAccount(@PathVariable long id, @RequestBody CurrentAccount account) {
-    	serviceAccount.save(account);
-    	return null;
+    private Account updateAccount(@PathVariable long id, @RequestBody AccountDto accountDto) {
+    	return postAccount(id, accountDto);
 	}
 }

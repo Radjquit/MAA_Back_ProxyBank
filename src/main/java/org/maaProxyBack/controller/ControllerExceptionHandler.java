@@ -25,12 +25,12 @@ public class ControllerExceptionHandler {
         return map;
     }
     
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public String notValidCredentials(Exception e) {
-		return  "invalid credential";
-    	
-    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    public String notValidCredentials(Exception e) {
+//		return  "invalid credential";
+//    	
+//    }
 
 
 }
