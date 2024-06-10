@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl implements AccountService {
 	
-    private ClientRepository dao;
+
     private AccountRepository accountDao;
     
-    public AccountServiceImpl(ClientRepository dao, AccountRepository accountDao) {
-        this.dao=dao;
+    public AccountServiceImpl(AccountRepository accountDao) {
+
         this.accountDao = accountDao;
     }
 
